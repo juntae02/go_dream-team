@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import CompressedImage
@@ -15,6 +14,11 @@ class HoughLaneVisualizer(Node):
         self.bridge = CvBridge()    # ROS 이미지 -> OpenCV 변환기
         self.width = 320  # 이미지 가로 해상도
 
+        self.crosswalk_detected = False
+        self.crosswalk_detected_time = 0.0 
+        self.last_linear_x = 0.0
+        self.last_angular_z = 0.0
+
         # PID 제어용 파라미터
         self.Kp = 0.005
         self.Ki = 0.0001
@@ -22,7 +26,7 @@ class HoughLaneVisualizer(Node):
 
         self.error_sum = 0.0
         self.last_error = 0.0
-        self.base_speed = 0.08
+        self.base_speed = 0.07
         self.min_speed = 0.05
 
         # 이미지 토픽 구독자 생성
@@ -40,6 +44,8 @@ class HoughLaneVisualizer(Node):
             
         # 속도 명령 퍼블리셔 (모터 제어용)
         self.cmd_publisher = self.create_publisher(Twist, '/cmd_vel', 10)
+        self.cmd_publisher = self.create_publisher(Twist, 'lane/cmd_vel', 10)
+
     
     # 콜백 함수
     def image_callback(self, msg):
@@ -50,7 +56,10 @@ class HoughLaneVisualizer(Node):
         try:
             # ROS 이미지 메시지를 OpenCV BGR 이미지로 변환
             cv_image = self.bridge.imgmsg_to_cv2(msg, "bgr8")   
+           
             lane_center, result = self.detect_lane(cv_image)
+            self.detect_crosswalk(cv_image)
+
 
             if lane_center is not None:
                 image_center = self.width // 2
@@ -63,19 +72,18 @@ class HoughLaneVisualizer(Node):
                 cmd.angular.z = angular_z
                 # time.sleep(1.0)
                 self.cmd_publisher.publish(cmd)
+                self.last_linear_x = linear_x
+                self.last_angular_z = angular_z
 
         except Exception as e:
             self.get_logger().error(f"Processing error: {e}")
             return
 
         # 차선 검출 처리
-        
-
         if result is not None:
             # 빨간선으로 표시
             if lane_center is not None:
                 cv2.line(result, (lane_center, result.shape[0]), (lane_center, int(result.shape[0] * 0.5)), (0, 0, 255), 2) 
-
             # 결과 이미지 출력
             cv2.imshow("Hough Lane Detection", result)
             cv2.waitKey(1)
@@ -99,17 +107,22 @@ class HoughLaneVisualizer(Node):
 
     # 2. 전처리
         # ROI를 그레이스케일로 변환
-        gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)    # 차선을 색상이 아닌 밝기로 구별하기 위해
 
         # 가우시안 블러로 노이즈 제거
-        blur = cv2.GaussianBlur(gray, (5, 5), 0)
+        blur = cv2.GaussianBlur(gray, (5, 5), 0)        # 노이즈의 강도를 줄여주는 역할
+            # 노이즈는 약하고 작기 때문에 블러에 의해 쉽게 흐려지고 사라짐
+            # 차선은 굵고 명확한 밝기 변화를 가지고 있어서, 감지됨
 
         # 모폴로지 열기 연산으로 잔여 노이즈 정제
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
-        opened = cv2.morphologyEx(blur, cv2.MORPH_OPEN, kernel)
-
+        opened = cv2.morphologyEx(blur, cv2.MORPH_OPEN, kernel) # 침식 -> 팽창
+            # 노이즈의 형태를 제거하는 방식(작은 점, 얇은 선, 끊긴 점 등)
+        
         # Canny 엣지 검출 (선의 윤곽 감지)
-        edges = cv2.Canny(opened, 65, 200)  
+        edges = cv2.Canny(opened, 65, 200)  # 차선 하나에 엣지가 두 개 발생
+        # edges = cv2.Canny(blur, 65, 200)  
+        cv2.imshow("Canny Edges", edges)
 
     # 3. 허프 변환으로 직선 검출
         lines = cv2.HoughLinesP(edges, 1, np.pi / 180, threshold=50,
@@ -138,29 +151,31 @@ class HoughLaneVisualizer(Node):
             x2_orig = x2_roi + roi_start_x
             y2_orig = y2_roi + roi_start_y
             
-            # 선 길이 계산
+            # 선 길이
             dx = x2_orig - x1_orig
             dy = y2_orig - y1_orig
             length = np.sqrt(dx**2 + dy**2)
-            # 너무 짧은 선은 제거
+            # 짧은 선 제거
             if length < 24:
                 continue    
 
-            # 기울기 계산 
+            # 기울기
             slope = dy / (dx + 1e-6)  # 0으로 나눔 방지   
-            # 수평에 가까운 선은 제외
+            # 수평 또는 수직에 가까운 선은 제외
             if abs(slope) < 0.05 or abs(slope) > 112.0:
                 continue
-        # 중요
-            # 선 두께 측정
-            thickness_ok = False
-            num_thick_pixels = 0
+
+            
 
             # ROI 내 좌표로 다시 계산
             x1_rel = x1_orig - roi_start_x
             y1_rel = y1_orig - roi_start_y
             x2_rel = x2_orig - roi_start_x
             y2_rel = y2_orig - roi_start_y
+
+            # 선 두께 측정
+            thickness_ok = False
+            num_thick_pixels = 0
 
             # 선 중심선 좌표 생성
             points = np.linspace((x1_rel, y1_rel), (x2_rel, y2_rel), 10).astype(int)
@@ -172,35 +187,29 @@ class HoughLaneVisualizer(Node):
                     if 0 <= oy < edges.shape[0] and 0 <= ox < edges.shape[1]:
                         if edges[oy, ox] > 0:
                             num_thick_pixels += 1
-
-            if num_thick_pixels <= 19 and num_thick_pixels >= 10:  # 충분히 두꺼운 선만 통과
+            
+            # 차선 두께 맞춤
+            if num_thick_pixels <= 19 and num_thick_pixels >= 10:  
                 thickness_ok = True
-
             if not thickness_ok:
-                continue  # 얇은 선은 스킵
+                continue  
 
-            # 중요 
-            # 선 근처 밝기 측정 (진짜 차선인지 판단)
-            # 선 중간 10 지점을 샘플링
-            # 너무 짧은 선은 제거
+            # 선 근처 밝기 측정 (선 중간 10 지점을 샘플링)
             brightness_sample_points = np.linspace((x1_rel, y1_rel), (x2_rel, y2_rel), 10).astype(int)
-
-            # 그 지점의 밝기 평균을 구함
+            # 해당 지점의 밝기 평균
             brightness_values = [gray[min(p[1], gray.shape[0]-1), 
                                       min(p[0], gray.shape[1]-1)] 
                                  for p in brightness_sample_points]
-
             mean_brightness = np.mean(brightness_values)
-
             # 밝기가 낮으면 빛을 받은 검정으로 간주
             if mean_brightness < 75:
                 continue
 
             # 좌/우 선을 구분
-            if slope < 0 and x2_orig < mid_x_original + 50: # 왼쪽 차선 (음의 기울기, 중간보다 왼쪽) # 수정
-                left_lines.append((x1_orig, y1_orig, x2_orig, y2_orig)) # 수정: 원본 좌표 저장
-            elif slope > 0 and x1_orig > mid_x_original - 50: # 오른쪽 차선 (양의 기울기, 중간보다 오른쪽) # 수정
-                right_lines.append((x1_orig, y1_orig, x2_orig, y2_orig)) # 수정: 원본 좌표 저장
+            if slope < 0 and x2_orig < mid_x_original + 50: # 왼쪽 차선 (음의 기울기, 중간보다 왼쪽) 
+                left_lines.append((x1_orig, y1_orig, x2_orig, y2_orig))
+            elif slope > 0 and x1_orig > mid_x_original - 50: # 오른쪽 차선 (양의 기울기, 중간보다 오른쪽)
+                right_lines.append((x1_orig, y1_orig, x2_orig, y2_orig)) 
 
             # 검출된 라인 그리기
             cv2.line(line_image, (x1_orig, y1_orig), (x2_orig, y2_orig), (0, 255, 0), 2)  
@@ -231,6 +240,62 @@ class HoughLaneVisualizer(Node):
         # 원본 이미지와 차선 검출 결과 합성
         result = cv2.addWeighted(cv_image, 0.8, line_image, 1, 0)
         return lane_center, result
+
+###
+    def detect_crosswalk(self, cv_image):
+        # 횡단보도 감지용 ROI
+        height_c = cv_image.shape[0]
+        width_c = cv_image.shape[1]
+        cw_roi = cv_image[int(height_c * 0.01):height_c, 0 :int(width_c * 0.95)]
+        # cw_roi = cv_image[int(height_c * 0.01):int(height_c * 0.70), int(width_c * 0.15):int(width_c * 0.8)]
+        
+        cw_image = np.zeros_like(cw_roi)
+
+        # 현재 시간
+        current_time = time.time()
+
+        # HSV 흰색상 mask
+        hsv = cv2.cvtColor(cw_roi, cv2.COLOR_BGR2HSV)
+        lower_white = np.array([0, 0, 130])
+        upper_white = np.array([180, 80, 255])
+        mask_white = cv2.inRange(hsv, lower_white, upper_white)
+
+        # 횡단보도 감지
+        cw_edges = cv2.Canny(mask_white, 50, 150)
+        cw_lines = cv2.HoughLinesP(cw_edges, 1, np.pi / 180, threshold=50,
+                                minLineLength=25, maxLineGap=20)
+
+        vertical_lines = []
+        if cw_lines is not None:
+            for line in cw_lines:
+                x1, y1, x2, y2 = line[0]
+                if abs(x2 - x1) < 10 and abs(y2 - y1) > 20: # 수직 선 판단 + 짧은 선 방지
+                    vertical_lines.append((x1, y1, x2, y2))
+        
+        for (x1, y1, x2, y2) in vertical_lines:
+            cv2.line(cw_image, (x1, y1), (x2, y2), (0, 255, 0), 2)
+
+        if len(vertical_lines) >= 4:
+            if (not self.crosswalk_detected) or (current_time - self.crosswalk_detected_time > 15.0):
+                self.get_logger().info("횡단보도 감지 → STOP")
+                time.sleep(0.1)
+                stop_cmd = Twist()
+                stop_cmd.linear.x = 0.0
+                stop_cmd.angular.z = 0.0
+                self.cmd_publisher.publish(stop_cmd)
+                time.sleep(1.0)
+                self.crosswalk_detected = True
+
+                resume_cmd = Twist()
+                resume_cmd.linear.x = self.last_linear_x
+                resume_cmd.angular.z = self.last_angular_z
+                self.cmd_publisher.publish(resume_cmd)
+                self.crosswalk_detected_time = current_time
+
+        result = cv2.addWeighted(cw_roi, 0.8, cw_image, 1, 0)
+
+        cv2.imshow("Crosswalk ROI", result)
+        cv2.waitKey(1)
 
     def calculate_pid_control(self, error):
         p_term = self.Kp * error

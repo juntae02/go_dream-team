@@ -1,2 +1,0 @@
-
-    rclpy.init(args=args)
