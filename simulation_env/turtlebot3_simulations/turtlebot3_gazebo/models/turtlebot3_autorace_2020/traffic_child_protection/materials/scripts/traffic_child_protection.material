@@ -1,0 +1,14 @@
+material traffic_child_protection
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture traffic_child_protection.png
+      }
+    }
+  }
+}
+
