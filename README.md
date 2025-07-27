@@ -23,3 +23,19 @@
 > 언어는 영어로 설정해야 폰트가 변형되지 않음  
 >> - [🚗 출발~ 드림팀](https://www.canva.com/design/DAGt2sLx8RI/VkKIgs1l_i8HXuTRUbE8JQ/edit?utm_content=DAGt2sLx8RI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) (시뮬레이션)
 >> - [🚗 출발~ 드림팀](https://www.canva.com/design/DAGt2kunhJg/goZzTe1LCq2qbrLk0cxp_A/edit?utm_content=DAGt2kunhJg&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) (실제)
+
+
+## 📚 참고 및 출처
+
+- `simulation_env/turtlebot3_autorace/` 디렉토리는 아래 공개 저장소를 기반으로 하여, **일부 기능을 수정하고 프로젝트 목적에 맞게 재구성**하였습니다.  
+  > 🔗 https://github.com/ROBOTIS-GIT/turtlebot3_autorace
+
+- `simulation_env/turtlebot3_simulations/` 디렉토리 역시 다음 저장소를 바탕으로 하여, **시뮬레이션 환경 설정 등에 필요한 부분을 수정하여 사용**하였습니다.  
+  > 🔗 https://github.com/ROBOTIS-GIT/turtlebot3_simulations
+
+- 위 두 저장소 모두 [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0.html)를 따르며, 본 프로젝트 역시 해당 라이선스를 준수하여 사용하고 있습니다.
+
+- `realistic_env/` 폴더 내 코드는 **직접 설계 및 구현한 실제 환경용 코드**로,  
+  시뮬레이션 환경 코드를 바탕으로 참고한 부분이 있을 수 있으나, 본 프로젝트 목적과 환경에 맞게 독립적으로 작성되었습니다.
+
+> 본 저장소는 교육 및 학습 목적으로만 사용됩니다.
