@@ -27,10 +27,12 @@
 
 ## 📚 참고 및 출처
 
-- `simulation_env/turtlebot3_autorace/` 디렉토리는 아래 공개 저장소를 기반으로 하여, **일부 기능을 수정하고 프로젝트 목적에 맞게 재구성**하였습니다.  
+- `simulation_env/turtlebot3_autorace/` 디렉토리는 아래 공개 저장소를 기반으로 하여,  
+  **일부 기능을 수정하고 프로젝트 목적에 맞게 재구성**하였습니다.  
   > 🔗 https://github.com/ROBOTIS-GIT/turtlebot3_autorace
 
-- `simulation_env/turtlebot3_simulations/` 디렉토리 역시 다음 저장소를 바탕으로 하여, **시뮬레이션 환경 설정 등에 필요한 부분을 수정하여 사용**하였습니다.  
+- `simulation_env/turtlebot3_simulations/` 디렉토리 역시 다음 저장소를 바탕으로 하여,  
+  **시뮬레이션 환경 설정 등에 필요한 부분을 수정하여 사용**하였습니다.  
   > 🔗 https://github.com/ROBOTIS-GIT/turtlebot3_simulations
 
 - 위 두 저장소 모두 [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0.html)를 따르며, 본 프로젝트 역시 해당 라이선스를 준수하여 사용하고 있습니다.
