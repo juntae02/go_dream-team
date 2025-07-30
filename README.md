@@ -66,11 +66,11 @@
 <br />
 
 ## 🎥 시연 영상
-- 영상(본인) : [Demo_Me](https://www.youtube.com/watch?v=wulUciU5lNg)  
-- 영상(전체) : [Demo_All](https://www.youtube.com/watch?v=4p3I4KdZMHU)  
+- [🎞️ Demo (개인 시연 영상)](https://www.youtube.com/watch?v=wulUciU5lNg)  
+- [🎞️ Demo (전체 시연 영상)](https://www.youtube.com/watch?v=4p3I4KdZMHU)  
 👉 클릭해서 시연 영상 보기
-- 발표 자료 : [Presentation](https://www.canva.com/design/DAGt2pGk8OM/XAmI-RrP8dZGNZCpIRM1vw/edit?utm_content=DAGt2pGk8OM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)  
-⚠️ 언어는 영어로 설정해야 폰트가 변형되지 않습니다.  
+- [🖥️ 발표 자료 (Canva)](https://www.canva.com/design/DAGt2pGk8OM/XAmI-RrP8dZGNZCpIRM1vw/edit?utm_content=DAGt2pGk8OM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)  
+⚠️ Canva에서는 언어를 영어로 설정해야 폰트가 변형되지 않습니다.  
 <br />
 
 ## 🛠️ 기술 스택
@@ -82,54 +82,64 @@
 <br />
 
 ## 👨‍💻 담당한 기능
-&nbsp;&nbsp;"충돌" 및 "용탕 튐"과 같은 **위험 요소를 방지**하는 방향으로, ***주조 공정 자동화*** 설계 
-
-- **amovej 이동 시 충돌 방지를 위한 정지 기능** :  
-  > &nbsp;&nbsp;비동기 movej 이동 중 **로봇암에 가해지는 외력**을 힘 센서로 실시간 감지하고, 설정된 임계값을 초과할 경우 **즉시 정지**하는 안전 로직을 구현했습니다. 
-  > 충돌이 감지되면 로봇은 **XYZ방향으로 위치 유연 및 자세 고정의 순응 제어**를 활성화하여 충격을 흡수하고, 작업자나 주변 환경에 가해지는 물리적 부담을 완화합니다. 
-  > 이후 외력이 임계값 이하로 떨어지면 **순응 제어를 해제**하고, 이전 목표 지점으로 **재이동**하여 작업을 재개합니다.
-
-  👉 [충돌 방지 기능](https://github.com/juntae02/my_perfect_secretary/blob/main/blacksmith_robot/stop_motion.py#L35-L68)
-  
-- **래들 감지를 위한 Compliance Control 및 Force Control 적용** :  
-  > &nbsp;&nbsp;용탕을 담는 **래들**의 위치를 정밀하게 감지하기 위해 **task_compliance_ctrl() 및 set_desired_force()를** 적용하여, 로봇이 **Y축 방향**으로 부드럽게 접근하도록 설계했습니다. 
-  > **check_force_condition()을** 통해 외력 변화로 래들의 존재를 감지하고, **get_current_posx()[0]으로** 좌표를 획득하여 해당 위치를 기반으로 래들을 수거하는 동작을 수행합니다.
-
-  👉 [래들 감지 기능](https://github.com/juntae02/my_perfect_secretary/blob/main/blacksmith_robot/casting.py#L115-L145)
-
-- **안정적인 용탕 이송을 위한 movesx 기능** :  
-  > &nbsp;&nbsp;용탕 이송 중 **넘침**을 방지하기 위해 관절을 움직이는 **movej**는 사용하지 않았고, 직선 경로의 **movel** 대신 곡선 궤적의 **movesx**를 사용하여 보다 **부드럽고 신속하게** 이동하도록 구현했습니다. 
-  > 특히 **Z축의 진동**은 넘침 위험이 있으므로, **Z축은 고정**한 채 **X-Y축 중심으로** 이송을 수행하도록 제어했습니다.
-
-  👉 [용탕 이송 기능](https://github.com/juntae02/my_perfect_secretary/blob/main/blacksmith_robot/casting.py#L147-L169)
-  
-- **용탕 균일화를 위한 move_periodic 기능** :  
-  > &nbsp;&nbsp;용탕 속 불순물이 바닥에 가라앉는 **침전 현상**과 **내부 온도 불균형**을 방지하기 위해, **move_periodic()** 함수를 활용해 **주기적 진동 기반의 교반 동작**을 구현했습니다. 
-  > **X-Y축**에 진폭과 주기를 각각 적용하여 용탕을 일정 패턴으로 흔들며 **열 균일화**와 **품질 안정화**를 유도했고, 넘침 방지를 위해 **Z축 회전**은 적용하지 않았습니다.
-
-  👉 [용탕 균일화 기능](https://github.com/juntae02/my_perfect_secretary/blob/main/blacksmith_robot/casting.py#L171-L182)
-
-- **안정적인 용탕 주입을 위한 movel 명령 시퀀스 기능** :  
-  > &nbsp;&nbsp;용탕 주입 시 튐 현상을 방지하기 위해, **두 단계의 movel() 직선 궤적 시퀀스**를 적용했습니다. 
-  > 실제 물을 따르듯, 먼저 천천히 로봇의 회전 각도를 조절해 **용탕의 흐름을 유도**한 후, 깊은 각도로 주입을 완료하여 잔여 용탕까지 **모두 투입**되도록 구현했습니다.  
-
-  👉 [용탕 주입 기능](https://github.com/juntae02/my_perfect_secretary/blob/main/blacksmith_robot/casting.py#L184-L198)
+&nbsp;&nbsp;주조 공정 전체 자동화를 담당하여, 고온 액체를 다루는 위험한 환경에서도 **정밀성**, **안정성**를 모두 고려한 협동로봇 제어 로직을 설계했습니다.
+- **충돌 방지 로직** : amovej 이동 중 외력을 실시간 감지하여, 순응 제어로 충돌 피해를 최소화했습니다.
+- **래들 감지** : 순응 제어 및 힘 제어를 통해 래들을 감지하고, 자동 좌표 보정으로 수거 위치를 정밀 제어했습니다.
+- **용탕 이송 안정화** : 넘침 방지를 위해 곡선 경로(movesx) 적용, Z축은 고정하고 X-Y축 중심으로 이동했습니다.
+- **용탕 균일화(교반)** : move_periodic()을 사용한 주기적 진동으로, 내부 온도 분산 및 침전 방지했습니다.
+- **안정적인 용탕 주입** : 두 단계의 movel로 흐름 유도 후 정밀 주입으로, 용탕 튐 방지했습니다.
 <br />
 
-## 🤔 트러블슈팅 및 해결 과정 
-- 문제 상황: 충돌 감지 시 정지 기능 모션 명령어의 stop 모션이 적용되지 않음
-> - 시도했던 방법:
-> - 해결 과정:
-> - 결과
-- 문제 상황: 래들 감지 위치가 다를 때, get_current_posx()[0] 로 위치 받아서 상대 좌표로 이동
+## 🤔 트러블슈팅 및 해결 
 
+- **문제 상황 1: amovej 이동 중, stop() 명령어가 작동하지 않음**
+  - **상황** : Doosan API의 stop() 명령어가 **티치 펜던트 상에서는 정상 작동**했으나, **Python 기반 제어 코드에서는 정지하지 않았습니다**.
+  - **원인** : **정확한 원인은 확인되지 않았지만**, 외력 감지 기반의 실시간 정지 기능이 필요하다고 판단했습니다.
+  - **해결** : 외력이 임계값을 초과하면, **task_compliance_ctrl()** 명령어를 통해 **XYZ방향으로 위치 유연 및 자세 고정의 순응 제어**를 일시적으로 활성화하여, 
+   **즉시 정지한 것처럼** 동작하도록 구현했습니다. 이후 외력이 해소되면 순응 제어를 해제하고, 기존 **목표 위치로 재이동**하여 작업을 재개합니다.  
+  👉 [충돌 방지 코드](https://github.com/juntae02/my_perfect_secretary/blob/main/blacksmith_robot/stop_motion.py#L35-L68)
+---
+
+- **문제 상황 2: 래들 위치가 매번 다르게 감지됨**
+  - **상황** : 용탕을 담는 래들의 위치가 **환경 변화나 오차**로 인해, 매번 조금씩 달랐습니다.
+  - **원인** : 위치를 **고정된 좌표**로 접근할 경우, 정확한 수거 실패 가능성이 높았습니다.
+  - **해결** : **Compliance Control** 및 **Force Control** 기반으로 래들의 존재를 감지하고, 
+    이후 **get_current_posx()[0]** 기반으로 좌표를 실시간 보정하고, 래들 수거 동작을 수행합니다.  
+  👉 [래들 감지 코드](https://github.com/juntae02/my_perfect_secretary/blob/main/blacksmith_robot/casting.py#L115-L145)
+---
+
+- **문제 상황 3: 용탕 이송 중 넘침 현상 발생**
+  - **상황** : 용탕 대신 블럭을 담은 상태에서 로봇 이동 중, 블럭이 흔들리거나 낙하하는 문제가 발생했습니다. 
+  - **원인** : **movej** 사용 시 **급격한 관절 각도 변화**로 인해, 진동 또는 충격이 발생하면서 안정성이 저하되었습니다. 
+    또한, **movel** 사용 시 **Z축 이동 값**이 포함되면, Z축 진동이 발생하여 넘침 또는 낙하 위험이 커졌습니다.
+  - **해결** : **movej**의 급격한 관절 회전을 방지위해, **곡선 궤적 기반의 movesx** 명령어를 사용했습니다. 
+    또한, **Z축을 고정**한 채 X-Y축 중심으로 이동함으로써 수직 진동을 억제하고, **movel**보다 **부드럽고 신속한 이송**을 구현했습니다.  
+  👉 [용탕 이송 코드](https://github.com/juntae02/my_perfect_secretary/blob/main/blacksmith_robot/casting.py#L147-L169)
+---
+
+- **문제 상황 4: 용탕 내 온도 불균형 및 침전 현상 (가정된 상황)**
+  - **상황** : 래들이 위치한 **용광로**와, 용탕을 주입할 **거푸집** 간의 거리가 먼 상황을 가정했습니다.  
+    이로 인해 이송 중 용탕의 **표면과 내부 간 온도 차이**가 발생하고, 바닥에 **불순물이 침전**되는 현상이 발생할 수 있습니다.
+  - **원인** : **이송 거리가 길어지면서**, 용탕 내에서 열 전달이 불균일하게 이루어지고 불순물 침전이 발생할 가능성이 커졌습니다.
+  - **해결** :  **move_periodic()** 함수를 활용해 **X-Y축에 진폭과 주기**를 적용했습니다. 
+    그 결과로 **주기적 진동을 통한 교반 동작**을 수행했고, **열 균일화**와 **품질 안정화**를 유도했습니다. 
+    (※ **Z축은 고정**하여 넘침 위험을 최소화함)  
+  👉 [용탕 균일화 코드](https://github.com/juntae02/my_perfect_secretary/blob/main/blacksmith_robot/casting.py#L171-L182)
+---
+
+- **문제 상황 5: 주입 시 튐 현상 (가정된 위험 상황)**
+  - **상황** : 실제 용탕을 사용하지는 않았지만, 액체를 주입할 때 발생하는 **튀는 상황을 가정**했습니다.
+  - **원인** : **빠른 속도**로 주입 각도를 변경하거나, **깊은 각도로 한 번에 접근**할 경우 튀는 현상을 유발합니다.
+  - **해결** : **movel() 시퀀스를 두 단계로 분리**하여, 먼저 천천히 각도를 조절해 **액체의 흐름을 유도**하고, 
+    이후 **깊은 각도로 주입을 완료**하여 잔여 용탕까지 부드럽게 주입되도록 설계했습니다.  
+  👉 [용탕 주입 코드](https://github.com/juntae02/my_perfect_secretary/blob/main/blacksmith_robot/casting.py#L184-L198)
 <br />
 
-## 💡 과정 속에서 배운 점 및 향후 계획
-- 배운 점:
-> - d:
-- 향후 계획:
-> - 긴급 정지 기능:
+## 💡 과정 속에서 배운 점
+&nbsp;&nbsp;이번 프로젝트를 통해 단순한 경로 제어가 아닌, **로봇 동작의 동역학적 해석**과 **실시간 대응 제어**의 중요성을 배웠습니다. 
+특히, 고온 액체를 다루는 주조 공정에서는 로봇의 관절 속도, 진동 등 움직임의 물리적 특성을 고려해야 했고, 이를 위해서 **곡선 경로 설정, 순응 제어, 힘 제어**를 활용해 진동과 충격을 최소화했고, 작업 안정성을 확보했습니다. 
+또한, 실제 환경의 불확실성을 대응하기 위해, **센서 기반의 위치 보정**으로 오차에도 유연하게 대응하는 방법을 익혔습니다. 
+이를 통해 로봇을 단순 자동화 기계가 아닌, **협업 가능한 파트너**로 설계하는 경험을 할 수 있었습니다.  
 <br />
 
 
