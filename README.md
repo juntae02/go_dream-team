@@ -42,85 +42,96 @@
 
 > 본 저장소는 교육 및 학습 목적으로만 사용됩니다.
 
+@#@@
 
-
-
-## 🌸 Bloom for you
-- ***키움의 과정을 선물하는*** 꽃 선물 서비스 :  
-&nbsp;&nbsp;선물의 목적과 기간에 적합한 꽃을 추천하고, 재배 과정에서 음성을 기록하여 진심을 전달합니다.  
-또한, 로봇암 기반의 자동화 시스템으로 재배 실패 부담을 해소합니다.
-- 개발기간 : 2025.06.09-06.20(2주)  
-- 개발인원 : 4명(팀원)  
+## 🦾 나의 완벽한 비서
+- **장인 보조 협동로봇**, Part 1 - 대장장이 :  
+  &nbsp;&nbsp;주조 및 단조 공정의 단순 반복 작업을 협동로봇이 수행하여, 장인들의 고유 기술을 지키는 프로젝트입니다.
+- 개발기간 : 2025.05.23-06.05(2주)  
+- 개발인원 : 4명(팀장)  
 <br />
 
 ## 🔍 문제 정의
-> &nbsp;&nbsp;이 프로젝트는 ***"선물의 종류는 많지만 감정은 없다"는*** 문제의식에서 출발했습니다.  
-> 기존의 선물은 순간적인 감동에 그치는 경우가 많습니다. 우리는 받는 이가 꽃을 직접 기르지 않더라도, 꽃의 성장 과정을 ***공유***하며 지속적인 ***기쁨과 진심***이 전해지는, ***새로운 형태의 선물***을 만들고자 했습니다. 또한, 식물 재배의 어려움과 실패에 대한 부담을 ***로봇 기술***로 해결함으로써, ***누구나 꽃을 쉽게 기를 수 있도록 돕는 것***을 목표로 했습니다.
+> &nbsp;&nbsp;장인들의 **고령화**와 젊은 세대의 **높은 진입 장벽**으로 인해, 고유 기술이 사라진다는 문제의식에서 출발했습니다.  
+저희는 **협동로봇의 도입**을 통해, 자동화 및 보조 기능으로 **장인분들의 신체적 부담을 줄이는 것을 목표**로 했습니다.   
+또한, 자동화 및 사용자 친화적인 TCP 통신으로 기술의 진입 장벽을 낮춰, **고유 기술의 계승을 돕는 것을 목표**로 했습니다.  
 <br />
 
 ## 📌 주요 기능
-- ***상황별 꽃 추천*** : 대화를 통해, 선물의 목적과 기간에 최적화된 꽃을 추천합니다.
-- ***자동화된 씨앗 심기*** : 로봇암을 활용하여, 씨앗 심기 과정을 자동화합니다.
-- ***음성 메시지 기록*** : 재배 과정에서 음성을 기록하고, 포장 시 QR코드로 전달합니다.
-- ***자동 관수 시스템*** : 꽃의 관수 주기에 맞춰, 물을 자동으로 공급합니다. 
-- ***YOLO 기반 객체 탐지*** : 프로젝트에 최적화된 객체 탐지 모델을 통해, 특정 객체를 인식하고 처리합니다.
+- **주조 공정 자동화** : 용탕 주입, 용탕 균일화 등 주조 과정에서의 반복적이고 위험한 작업을 협동로봇이 수행합니다.
+- **단조 공정 지원** : 수평/수직 연마, 재련, 비틀기 등 단조 과정의 특정 작업을 협동로봇이 보조합니다.
+- **안전 기능 구현** : 충돌 감지 및 용탕 튐 방지와 같은 위험 요소를 사전에 방지하는 기능을 수행합니다.
+- **QC 무게 측정** : 생산된 제품의 무게를 측정하여 품질을 관리하는 기능을 수행합니다.
+- **TCP 통신 기반 제어** : 휴대폰과의 TCP 통신을 통해 로봇을 제어하고, 공정 상태를 모니터링 합니다.
 <br />
 
 ## 🎥 시연 영상
-- 영상(본인) : [Demo_Me](https://www.youtube.com/watch?v=E3JtXJ45bFk)  
-- 영상(전체) : [Demo_All](https://www.youtube.com/watch?v=jA9iK2Lapts)  
+- 영상(본인) : [Demo_Me](https://www.youtube.com/watch?v=wulUciU5lNg)  
+- 영상(전체) : [Demo_All](https://www.youtube.com/watch?v=4p3I4KdZMHU)  
 👉 클릭해서 시연 영상 보기
-- 발표 자료 : [Presentation](https://www.canva.com/design/DAGt2hxdEvg/8CEbznRIRrQc8xgAosH4Jg/edit?utm_content=DAGt2hxdEvg&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)  
+- 발표 자료 : [Presentation](https://www.canva.com/design/DAGt2pGk8OM/XAmI-RrP8dZGNZCpIRM1vw/edit?utm_content=DAGt2pGk8OM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)  
 ⚠️ 언어는 영어로 설정해야 폰트가 변형되지 않습니다.  
 <br />
 
 ## 🛠️ 기술 스택
-- **하드웨어 제어**: Doosan Robot Arm
+- **하드웨어**: Doosan Robotics M-series M0609
 - **개발 언어**: Python 
-- **프론트엔드**: Kivy
-- **백엔드**: Flask, rclpy
-- **AI / 데이터 처리**: YOLO, OpenAI API
-- **협업 툴**: GitHub, Notion, Draw.io
+- **백엔드**: rclpy
+- **통신**: TCP CLIENT APP
+- **협업 툴**: Notion, Draw.io
 <br />
 
 ## 👨‍💻 담당한 기능
-- ***YOLO 모델 생성 및 학습*** :  
-  &nbsp;&nbsp;프로젝트에 **최적화된 객체 탐지 모델을 구축하기 위해**, YOLO 모델을 생성 및 학습시켰습니다.  
-  이를 통해, 특정 꽃의 종류나 씨앗을 탐지하는 데 기여했습니다.  
-  👉 [모델 생성 및 학습 과정](https://github.com/juntae02/bloom_for_you/tree/main/yolo_models)
+&nbsp;&nbsp;"충돌" 및 "용탕 튐"과 같은 **위험 요소를 방지**하는 방향으로, ***주조 공정 자동화*** 설계 
+
+- **amovej 이동 시 충돌 방지를 위한 정지 기능** :  
+  > &nbsp;&nbsp;비동기 movej 이동 중 **로봇암에 가해지는 외력**을 힘 센서로 실시간 감지하고, 설정된 임계값을 초과할 경우 **즉시 정지**하는 안전 로직을 구현했습니다. 
+  > 충돌이 감지되면 로봇은 **XYZ방향으로 위치 유연 및 자세 고정의 순응 제어**를 활성화하여 충격을 흡수하고, 작업자나 주변 환경에 가해지는 물리적 부담을 완화합니다. 
+  > 이후 외력이 임계값 이하로 떨어지면 **순응 제어를 해제**하고, 이전 목표 지점으로 **재이동**하여 작업을 재개합니다.
+
+  👉 [충돌 방지 기능](https://github.com/juntae02/my_perfect_secretary/blob/main/blacksmith_robot/stop_motion.py#L35-L68)
   
-- ***상황별 꽃 추천 기능*** :  
-  &nbsp;&nbsp;OpenAI API 기반 키워드 추출 함수(팀원)를 활용하여, 사용자의 **목적과 상황을 반영하는 프롬프트**를 설계했습니다.  
-  추출된 키워드를 **JSON 파일과 매칭**하여, 적절한 꽃 정보를 자동으로 불러오는 **추천** 로직을 구성했습니다.  
-  해당 꽃 정보는 **Kivy 기반의 GUI**에서 사용자가 결과를 확인하고, **"선택" 또는 "재선택"을** 요청할 수 있는 인터페이스를 구현했습니다.  
-  👉 [꽃 추천 기능(flower_recommender.py)](https://github.com/juntae02/bloom_for_you/blob/main/bloom_for_you/bloom_for_you/flower_recommender.py#L205-L250)  
-  👉 [GUI(Kivy) 기능(flower_recommender.py)](https://github.com/juntae02/bloom_for_you/blob/main/bloom_for_you/bloom_for_you/flower_recommender.py#L95-L203)  
-  👉 [프롬프트 파일](https://github.com/juntae02/bloom_for_you/blob/main/bloom_for_you/resource/prompt/recommender_prompt.txt)  
-  👉 [JSON 파일](https://github.com/juntae02/bloom_for_you/blob/main/bloom_for_you/resource/flower_recommendations.json)
+- **래들 감지를 위한 Compliance Control 및 Force Control 적용** :  
+  > &nbsp;&nbsp;용탕을 담는 **래들**의 위치를 정밀하게 감지하기 위해 **task_compliance_ctrl() 및 set_desired_force()를** 적용하여, 로봇이 **Y축 방향**으로 부드럽게 접근하도록 설계했습니다. 
+  > **check_force_condition()을** 통해 외력 변화로 래들의 존재를 감지하고, **get_current_posx()[0]으로** 좌표를 획득하여 해당 위치를 기반으로 래들을 수거하는 동작을 수행합니다.
+
+  👉 [래들 감지 기능](https://github.com/juntae02/my_perfect_secretary/blob/main/blacksmith_robot/casting.py#L115-L145)
+
+- **안정적인 용탕 이송을 위한 movesx 기능** :  
+  > &nbsp;&nbsp;용탕 이송 중 **넘침**을 방지하기 위해 관절을 움직이는 **movej**는 사용하지 않았고, 직선 경로의 **movel** 대신 곡선 궤적의 **movesx**를 사용하여 보다 **부드럽고 신속하게** 이동하도록 구현했습니다. 
+  > 특히 **Z축의 진동**은 넘침 위험이 있으므로, **Z축은 고정**한 채 **X-Y축 중심으로** 이송을 수행하도록 제어했습니다.
+
+  👉 [용탕 이송 기능](https://github.com/juntae02/my_perfect_secretary/blob/main/blacksmith_robot/casting.py#L147-L169)
   
-- ***자동화된 씨앗 심기 기능*** :  
-  &nbsp;&nbsp;**ROS2 토픽 통신**을 통해 전달받을 꽃 정보를 해석하여, **로봇의 동작 흐름**을 설계했습니다.  
-  해당 꽃 정보를 바탕으로, YOLO를 통해 씨앗 및 화분의 위치를 탐지하고, **"씨앗 집기 -> 운반 -> 이식 -> 재배 구역 이동"** 로직을 구현했습니다.  
-  **씨앗 미탐지 예외 처리** 및 **순응 제어 기반의 정밀 배치 기능** 로직도 구성하여, 안정적인 동작을 보장했습니다.  
-  👉 [씨앗 Pick&Place(seed_planting.py)](https://github.com/juntae02/bloom_for_you/blob/main/bloom_for_you/bloom_for_you/seed_planting.py#L76-L156)  
-  👉 [화분 Compliance Control(seed_planting.py)](https://github.com/juntae02/bloom_for_you/blob/main/bloom_for_you/bloom_for_you/seed_planting.py#L158-L184)
+- **용탕 균일화를 위한 move_periodic 기능** :  
+  > &nbsp;&nbsp;용탕 속 불순물이 바닥에 가라앉는 **침전 현상**과 **내부 온도 불균형**을 방지하기 위해, **move_periodic()** 함수를 활용해 **주기적 진동 기반의 교반 동작**을 구현했습니다. 
+  > **X-Y축**에 진폭과 주기를 각각 적용하여 용탕을 일정 패턴으로 흔들며 **열 균일화**와 **품질 안정화**를 유도했고, 넘침 방지를 위해 **Z축 회전**은 적용하지 않았습니다.
+
+  👉 [용탕 균일화 기능](https://github.com/juntae02/my_perfect_secretary/blob/main/blacksmith_robot/casting.py#L171-L182)
+
+- **안정적인 용탕 주입을 위한 movel 명령 시퀀스 기능** :  
+  > &nbsp;&nbsp;용탕 주입 시 튐 현상을 방지하기 위해, **두 단계의 movel() 직선 궤적 시퀀스**를 적용했습니다. 
+  > 실제 물을 따르듯, 먼저 천천히 로봇의 회전 각도를 조절해 **용탕의 흐름을 유도**한 후, 깊은 각도로 주입을 완료하여 잔여 용탕까지 **모두 투입**되도록 구현했습니다.  
+
+  👉 [용탕 주입 기능](https://github.com/juntae02/my_perfect_secretary/blob/main/blacksmith_robot/casting.py#L184-L198)
 <br />
 
 ## 🤔 트러블슈팅 및 해결 과정 
-- 문제 상황: 화분에 꽃이 심어져 있을 때, 꽃은 인식하지 못하고 화분만 인식하는 문제 발생
+- 문제 상황: 충돌 감지 시 정지 기능 모션 명령어의 stop 모션이 적용되지 않음
 > - 시도했던 방법:
 > - 해결 과정:
 > - 결과
-- 문제 상황: 멀티 쓰레드
-- 문제 상황: 씨앗 pick 실패의 경우
+- 문제 상황: 래들 감지 위치가 다를 때, get_current_posx()[0] 로 위치 받아서 상대 좌표로 이동
+
 <br />
 
 ## 💡 과정 속에서 배운 점 및 향후 계획
 - 배운 점:
 > - d:
 - 향후 계획:
-> - d:
+> - 긴급 정지 기능:
 <br />
+
 
 ## 🤝 팀원 정보
 - ***준태***: YOLO 모델 생성, 꽃 추천 및 씨앗 심기(본인)   
@@ -128,18 +139,4 @@
 - 예은: 기능 모듈화, 자동 관수 및 꽃 포장 
 - 요한: Front-end, 음성 메시지 기록 및 QR코드 생성 
 <br />
-
-## 📚 참고 및 출처
-- 본 프로젝트의 일부 코드는 **두산 로보틱스 부트캠프 교육과정**에서 제공된  
-  `Tutorial.zip` 자료를 기반으로 작성되었습니다.
-- `STT.py`, `wakeup_word.py`, `keyword_extraction.py` 파일은 해당 자료에서 가져와 **일부 기능을 수정하여 사용**하였습니다.
-- 그 외의 파일은 프로젝트 목적에 맞게 **직접 구현된 코드**입니다.
-- 원본 전체 코드는 포함되어 있지 않으며, 본 저장소에는 **필요한 일부 파일만 포함**되어 있습니다.
-
-- `bloom_for_you/function_modules/onrobot_.py` 파일은 아래 공개 저장소의 코드를 기반으로 **일부 수정하여 사용**하였습니다:  
-  > 🔗 https://github.com/takuya-ki/onrobot-rg
-
-- 원본 코드는 [MIT License](https://github.com/takuya-ki/onrobot-rg/blob/main/LICENSE)를 따르며, 본 저장소 내 수정된 코드 역시 동일한 라이선스를 존중하여 사용하고 있습니다.
-
-> 본 저장소는 **교육 및 학습 목적**으로만 사용됩니다.
 
