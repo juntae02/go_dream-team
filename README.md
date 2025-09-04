@@ -23,7 +23,7 @@
 
 ## 🎥 시연 영상
 - [🎞️ Demo (개인 시연 영상)](https://www.youtube.com/watch?v=1DT9jmcWfok)  
-👉 클릭해서 시연 영상 보기
+👉 클릭하시면 시연 영상을 시청하실 수 있습니다.
 - [🖥️ 시뮬레이션 환경 발표 자료 (Canva)](https://www.canva.com/design/DAGt2sLx8RI/VkKIgs1l_i8HXuTRUbE8JQ/edit?utm_content=DAGt2sLx8RI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 - [🖥️ 모의 도로 환경 발표 자료 (Canva)](https://www.canva.com/design/DAGt2kunhJg/goZzTe1LCq2qbrLk0cxp_A/edit?utm_content=DAGt2kunhJg&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)  
 ⚠️ Canva에서는 언어를 영어로 설정해야 폰트가 변형되지 않습니다.  
