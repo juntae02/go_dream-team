@@ -72,7 +72,6 @@
     2. **기울기 필터링**: 수평이나 수직에 가까운 선은 벽이나 다른 차량일 가능성이 높아 제외했습니다.
     3. **선 두께 필터링**: 선 중심부 픽셀 수를 스캔해 너무 얇은 선은 노이즈로 간주하여 제거했습니다.
     4. **밝기 필터링**: 선 주변의 밝기를 측정해 노이즈를 최종적으로 제거했습니다.
-
   👉 [최종 차선 검출 이미지](https://github.com/juntae02/go_dream-team/blob/main/resource/after_img.jpg)  
   👉 [직선 필터링 코드](https://github.com/juntae02/go_dream-team/blob/main/realistic_env/lane_detect/brightness_lane_detect.py#L144-L206)
 ---
