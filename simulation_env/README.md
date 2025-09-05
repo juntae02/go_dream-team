@@ -13,7 +13,7 @@
     👉 [보행자 대응 코드](https://github.com/juntae02/go_dream-team/blob/main/simulation_env/turtlebot3_autorace/turtlebot3_autorace_detect/turtlebot3_autorace_detect/avoid_dynamic_obstacle.py#L53-L97)
   - **자동차(초록색)** : 초록색 원형 객체의 원형도 및 면적을 비교해 가까워지면 정지, 멀어지면 전진하도록 속도를 제어합니다.  
     👉 [자동차 대응 코드](https://github.com/juntae02/go_dream-team/blob/main/simulation_env/turtlebot3_autorace/turtlebot3_autorace_detect/turtlebot3_autorace_detect/avoid_dynamic_obstacle.py#L99-L144)
-- **방지턱(빨간색) 통과** : 빨간색 객체를 검출해 일정 크기 이상일 때 속도를 낮추고 직진하도록 명령합니다.
+- **방지턱(빨간색) 통과** : 빨간색 객체를 검출해 일정 크기 이상일 때 속도를 낮추고 직진하도록 명령합니다.  
   👉 [방지턱 대응 코드](https://github.com/juntae02/go_dream-team/blob/main/simulation_env/turtlebot3_autorace/turtlebot3_autorace_detect/turtlebot3_autorace_detect/avoid_dynamic_obstacle.py#L146-L178)
 - **Gazebo 환경 모델링** : 보행자와 자동차가 앞뒤 또는 'ㄱ'자 형태로 움직이도록 설계했습니다.
 <br />
