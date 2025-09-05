@@ -1,8 +1,8 @@
 ## 1. 🚗 출발~ 드림팀
 - **차선 인식 기반 자율주행 실험** :  
   &nbsp;&nbsp;컴퓨터 비전 기술을 활용하여 차선 및 환경 인식 자율주행 프로젝트입니다.
-- 개발기간 : 2025.06.23-07.04(2주) 
-- 개발인원 : 4명(팀원) 
+- 개발 기간 : 2025.06.23-07.04(2주) 
+- 개발 인원 : 4명(팀원) 
 <br />
 
 ## 🔍 문제 정의
@@ -97,11 +97,11 @@
 
 ## 📚 참고 및 출처
 
-- `simulation_env/turtlebot3_autorace/` 디렉토리는 아래 공개 저장소를 기반으로 하여,  
+- `simulation_env/turtlebot3_autorace/` 디렉터리는 아래 공개 저장소를 기반으로 하여,  
   **일부 기능을 수정하고 프로젝트 목적에 맞게 재구성**하였습니다.  
   > 🔗 https://github.com/ROBOTIS-GIT/turtlebot3_autorace
 
-- `simulation_env/turtlebot3_simulations/` 디렉토리 역시 다음 저장소를 바탕으로 하여,  
+- `simulation_env/turtlebot3_simulations/` 디렉터리 역시 다음 저장소를 바탕으로 하여,  
   **시뮬레이션 환경 설정 등에 필요한 부분을 수정하여 사용**하였습니다.  
   > 🔗 https://github.com/ROBOTIS-GIT/turtlebot3_simulations
 
