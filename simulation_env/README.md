@@ -41,7 +41,7 @@
   - **원인** : 이전 프레임과의 비교하지 않고 현재 프레임의 거리만으로 보행자의 움직임 방향을 판단했기 때문입니다.
     
   - **해결** : 이전 프레임과 현재 프레임의 객체 면적을 비교하는 로직을 구현하여, 보행자가 완전히 멀어진 경우에만 주행을 재개하도록 개선했습니다.  
-    👉 [프레임 비교 코드]()
+    👉 [프레임 비교 코드](https://github.com/juntae02/go_dream-team/blob/main/simulation_env/turtlebot3_autorace/turtlebot3_autorace_detect/turtlebot3_autorace_detect/avoid_dynamic_obstacle.py#L79-L97)
 ---
 
 - **문제 상황 2: 후진 동작의 오작동 발생**
