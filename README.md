@@ -53,7 +53,7 @@
 - **문제 상황 1: 빛 반사로 인한 차선 검출 오류 발생**
   
   - **상황** : 햇빛·그림자·반사 등으로 인해 차선 검출이 불안정했습니다.  
-  👉 [초기 차선 인식 이미지](https://github.com/juntae02/go_dream-team/blob/main/resource/test_img.png)
+  👉 [초기 차선 검출 이미지](https://github.com/juntae02/go_dream-team/blob/main/resource/before_img.png)
   
   - **원인** : 조명 조건으로 도로나 차선 색상이 변해 발생한 노이즈가 그대로 허프 변환으로 들어와 가짜 직선이 검출됐습니다.
     
@@ -67,7 +67,8 @@
     
   - **원인** : 허프 변환은 엣지만 존재하면 짧은 선이나 수평·수직선 등을 모두 직선으로 검출하기에 발생했습니다.
     
-  - **해결** : 4가지의 직선 필터링 과정을 추가해 실제 차선만 추출하도록 개선했습니다.
+  - **해결** : 4가지의 직선 필터링 과정을 추가해 실제 차선만 추출하도록 개선했습니다.  
+  👉 [최종 차선 검출 이미지](https://github.com/juntae02/go_dream-team/blob/main/resource/after_img.png)
   👉 [밝기 기반 코드](https://github.com/juntae02/go_dream-team/blob/main/realistic_env/lane_detect/brightness_lane_detect.py#L144-L206)
 ---
 
