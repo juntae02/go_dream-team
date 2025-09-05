@@ -9,7 +9,7 @@
 > &nbsp;&nbsp;해당 프로젝트는 **실제 환경에서 발생할 수 있는 다양한 문제**를 극복하여 안전한 **자율주행 시스템**을 개발하고자 했습니다.
 > 또한, **장애물**을 감지 및 Pick&Place를 하여 **다양한 환경 변화에 강인한 로봇 제어 시스템**을 구축하는 것을 목표로 했습니다.
 
-> &nbsp;&nbsp;5일간 **Gazebo 환경**에서 **"Line Detection"** 및 **"Obstacle Detection"** 기능 향상을 위한 프로젝트로 진행했습니다.  
+> &nbsp;&nbsp;5일간 **Gazebo 환경**에서 **"Line Detection"** 및 **"Obstacle Detection"** 기능 향상을 위한 프로젝트로 진행됐습니다.  
 👉 [시뮬레이션 환경](https://github.com/juntae02/go_dream-team/tree/main/simulation_env)
 <br />
 
