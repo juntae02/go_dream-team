@@ -59,7 +59,7 @@
     
   - **해결** : **Grayscale 변환**을 적용하여 색상 의존도를 제거했고, **Gaussian Blur**와 **모폴로지 Opening 연산**을 사용해 조명 조건에 의한 노이즈를 제거했습니다. 
     그 결과, 노이즈를 제거하고 끊어진 선들을 연결해 안정적인 엣지를 추출했습니다.  
-  👉 [밝기 기반 코드](https://github.com/juntae02/go_dream-team/blob/main/realistic_env/lane_detect/brightness_lane_detect.py#L108-L125)  
+  👉 [이미지 전처리 코드](https://github.com/juntae02/go_dream-team/blob/main/realistic_env/lane_detect/brightness_lane_detect.py#L108-L125)  
 ---
 
 - **문제 상황 2: 불필요한 직선 검출 발생**
@@ -73,7 +73,7 @@
     3. **선 두께 필터링**: 선 중심부 픽셀 수를 스캔해 너무 얇은 선은 노이즈로 간주하여 제거했습니다.
     4. **밝기 필터링**: 선 주변의 밝기를 측정해 임계값보다 작다면 노이즈를 최종적으로 제거했습니다.  
   👉 [최종 차선 검출 이미지](https://github.com/juntae02/go_dream-team/blob/main/resource/after_img.jpg)  
-  👉 [밝기 기반 코드](https://github.com/juntae02/go_dream-team/blob/main/realistic_env/lane_detect/brightness_lane_detect.py#L144-L206)
+  👉 [직선 필터링 코드](https://github.com/juntae02/go_dream-team/blob/main/realistic_env/lane_detect/brightness_lane_detect.py#L144-L206)
 ---
 
 - **문제 상황 3: 횡단보도와 차선의 구별을 못하는 경우 발생**
@@ -82,7 +82,7 @@
   - **원인** : 단일 정보인 밝기만으로는 횡단보도와 차선의 시각적 특성을 완벽하게 분리하기 어려웠습니다. 두 객체 모두 밝은 색상을 가지고 있기 때문에 밝기만으로는 의미 있는 구별이 불가능했습니다.
     
   - **해결** : 밝기 정보의 한계를 보완하기 위해 색상 정보를 보조적인 판단 기준으로 활용하는 접근 방식을 선택했습니다.   
-  👉 [밝기 기반 코드](https://github.com/juntae02/go_dream-team/blob/main/realistic_env/lane_detect/brightness_lane_detect.py#L245-L298)
+  👉 [횡단보도와 차선 구별 코드](https://github.com/juntae02/go_dream-team/blob/main/realistic_env/lane_detect/brightness_lane_detect.py#L245-L298)
 <br />
 
 ## 💡 과정 속에서 배운 점
