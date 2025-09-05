@@ -9,7 +9,7 @@
 > &nbsp;&nbsp;해당 프로젝트는 **실제 환경에서 발생할 수 있는 다양한 문제**를 극복하여 안전한 **자율주행 시스템**을 개발하고자 했습니다.
 > 또한, **장애물**을 감지 및 Pick&Place를 하여 **다양한 환경 변화에 강인한 로봇 제어 시스템**을 구축하는 것을 목표로 했습니다.
 
-> &nbsp;&nbsp;5일간 **Gazebo 환경**에서 **"Line Detection"** 및 **"Obstacle Detection"** 기능 향상을 위한 프로젝트를 진행했습니다.  
+> &nbsp;&nbsp;5일간 **Gazebo 환경**에서 **"Line Detection"** 및 **"Obstacle Detection"** 기능 향상을 위한 프로젝트로 진행했습니다.  
 👉 [시뮬레이션 환경](https://github.com/juntae02/go_dream-team/tree/main/simulation_env)
 <br />
 
@@ -24,7 +24,6 @@
 ## 🎥 시연 영상
 - [🎞️ Demo (개인 시연 영상)](https://www.youtube.com/watch?v=1DT9jmcWfok)  
 👉 클릭하시면 시연 영상을 시청하실 수 있습니다.
-- [🖥️ 시뮬레이션 환경 발표 자료 (Canva)](https://www.canva.com/design/DAGt2sLx8RI/VkKIgs1l_i8HXuTRUbE8JQ/edit?utm_content=DAGt2sLx8RI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 - [🖥️ 모의 도로 환경 발표 자료 (Canva)](https://www.canva.com/design/DAGt2kunhJg/goZzTe1LCq2qbrLk0cxp_A/edit?utm_content=DAGt2kunhJg&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)  
 ⚠️ Canva에서는 언어를 영어로 설정해야 폰트가 변형되지 않습니다.  
 <br />
