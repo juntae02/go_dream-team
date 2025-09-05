@@ -68,7 +68,7 @@
   - **원인** : 허프 변환은 엣지만 존재하면 짧은 선이나 수평·수직선 등을 모두 직선으로 검출하기에 발생했습니다.
     
   - **해결** : 4가지의 직선 필터링 과정을 추가해 실제 차선만 추출하도록 개선했습니다.  
-  👉 [최종 차선 검출 이미지](https://github.com/juntae02/go_dream-team/blob/main/resource/after_img.png)
+  👉 [최종 차선 검출 이미지](https://github.com/juntae02/go_dream-team/blob/main/resource/after_img.jpg)  
   👉 [밝기 기반 코드](https://github.com/juntae02/go_dream-team/blob/main/realistic_env/lane_detect/brightness_lane_detect.py#L144-L206)
 ---
 
