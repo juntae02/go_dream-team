@@ -59,8 +59,7 @@
 ## 📚 참고 및 출처
 - turtlebot3_simulations 폴더
 > $ git clone -b humble https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
-
 - turtlebot3_autorace 폴더
 > $ git clone https://github.com/ROBOTIS-GIT/turtlebot3_autorace.git
 
-> 본 저장소는 교육 및 학습 목적으로만 사용됩니다.
+본 저장소는 교육 및 학습 목적으로만 사용됩니다.
